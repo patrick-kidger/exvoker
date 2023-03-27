@@ -1,0 +1,13 @@
+repos:
+- repo: local
+  hooks:
+  - id: Format
+    name: Format
+    language: system
+    entry: rustfmt
+    types: [rust]
+  - id: Lint
+    name: Lint
+    language: system
+    entry: "cargo clippy -- -D warnings"
+    pass_filenames: false
