@@ -25,8 +25,6 @@ fn run_command(command: Vec<&str>, value: &str) -> anyhow::Result<()> {
 }
 
 fn main() -> anyhow::Result<()> {
-    // Not using any of the `dirs`, `home` etc. crates as this is a
-    // personal-only Linux-only application, so let's minimise dependencies.
     let config = path::Path::new(&home::home_dir().context("Could not locate home directory")?)
         .join(".config")
         .join("exvoker")
