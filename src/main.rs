@@ -35,7 +35,7 @@ fn main() -> anyhow::Result<()> {
     let configuration: Config = toml::from_str(&contents)?;
     let invoke = configuration.invoke.split(' ').collect::<Vec<&str>>();
     if invoke.is_empty() {
-        anyhow::bail!("Comamnd is empty");
+        anyhow::bail!("Command is empty");
     }
     let extract = regex::Regex::new(&configuration.extract)?;
 
