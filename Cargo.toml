@@ -11,6 +11,7 @@ console = "0.15.5"
 ctrlc  = {version = "3.2.5", features = ["termination"]}
 fuzzy-matcher = "0.3.7"
 home = "0.5.4"
+itertools = "0.10.5"
 regex = "1.7.3"
 serde = {version = "1.0.158", features = ["derive"]}
 toml = "0.7.3"

@@ -1,10 +1,10 @@
-use std::collections;
 use std::fs;
 use std::io;
 use std::path;
 use std::process;
 
 use anyhow::Context;
+use itertools::Itertools;
 
 mod dialoguer_fork;
 
@@ -43,12 +43,11 @@ fn main() -> anyhow::Result<()> {
 
     let stdin = io::read_to_string(io::stdin())?;
 
-    let mut matches = extract
+    let matches = extract
         .find_iter(stdin.as_str())
         .map(|x| x.as_str())
         .collect::<Vec<_>>();
-    let matches_set: collections::HashSet<_> = matches.drain(..).collect(); // deduplicate
-    matches.extend(matches_set.into_iter());
+    let matches = matches.into_iter().unique().collect::<Vec<_>>();
     if !matches.is_empty() {
         ctrlc::set_handler(move || {
             let term = console::Term::stdout();
