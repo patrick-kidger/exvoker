@@ -3,6 +3,8 @@
 
 The canonical use (that I wrote this for) is to extract URLs from stdout on the command line, and then automatically copy them to clipboard or open them in a web browser.
 
+<div align="center"><img width=600 src="./imgs/exvoker.gif"></div>
+
 ## Installation
 
 ```
