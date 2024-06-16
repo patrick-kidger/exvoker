@@ -1,3 +1,23 @@
+Archived: this was a fun project, but these days I make this happen by composing individual commands instead. E.g. I have this script bound to a key in `tmux`:
+```fish
+#!/usr/bin/env fish
+
+set file (mktemp)
+set mode (tmux display-message -p "#{pane_mode}")
+if test $mode = "copy-mode"
+    set start (math -1 x (tmux display-message -p "#{scroll_position}"))
+    set offset (tmux display-message -p "#{pane_height}")
+    # An additional offset of 1 is necessary, probably to remove the border at the top.
+    set end (math $start + $offset - 1)
+    tmux capture-pane -pJ -S $start -E $end > $file
+else
+    tmux capture-pane -pJ > $file
+end
+tmux new-window -n "<extract>" "cat $file | rg -o '(http|https)://\\S+[\\S&&[^\'\"]]' | sort | uniq | sk | vipe | <some command here>; rm $file"
+```
+
+---
+
 <h1 align="center">exvoker</h1>
 <p align="center"><em>Extract a regex, invoke a command on it.</em></p>
 
